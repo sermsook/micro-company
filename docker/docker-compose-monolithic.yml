@@ -1,0 +1,10 @@
+version: "2"
+
+services:  
+  
+  monolithic:
+    image: idugalic/monolithic
+    ports:
+     - "8080:8080"
+    command: java -Dspring.profiles.active=docker -jar /app.jar
+ 

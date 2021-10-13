@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: configserver
+  cloud:
+    config:
+      enabled: true
+      server:
+        git:
+          uri: https://github.com/idugalic/micro-company-config.git
+          default-label: axon3-boot
+      label: axon3-boot
+    
+security:
+  user:
+    password: password
+    
+server:
+  port: ${PORT:8888} 

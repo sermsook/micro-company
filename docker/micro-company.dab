@@ -1,0 +1,246 @@
+{
+  "Services": {
+    "adminserver": {
+      "Command": [
+        "./wait-for-it.sh", 
+        "configserver:8888", 
+        "-t", 
+        "60", 
+        "--", 
+        "java", 
+        "-Dspring.profiles.active=docker", 
+        "-jar", 
+        "/app.jar"
+      ], 
+      "Image": "idugalic/adminserver@sha256:adfd79f32be7a8ba81bd3fbe777565ed734cd7bdb1be8fa9635078c44b2833bd", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 9998, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "api-gateway": {
+      "Command": [
+        "./wait-for-it.sh", 
+        "configserver:8888", 
+        "-t", 
+        "60", 
+        "--", 
+        "java", 
+        "-Dspring.profiles.active=docker", 
+        "-jar", 
+        "/app.jar"
+      ], 
+      "Image": "idugalic/api-gateway@sha256:777ec03d28e32dc21a830a0a9160ad2d75ad48443b4d208749e868f0ed0b9396", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 9000, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "authserver": {
+      "Command": [
+        "./wait-for-it.sh", 
+        "configserver:8888", 
+        "-t", 
+        "60", 
+        "--", 
+        "java", 
+        "-Dspring.profiles.active=docker", 
+        "-jar", 
+        "/app.jar"
+      ], 
+      "Image": "idugalic/authserver@sha256:a0f430cba9a60eb66d29924062765b258af429a9ea7d023c5a21bb064c47cc68", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 9999, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "circuit-breaker": {
+      "Command": [
+        "./wait-for-it.sh", 
+        "configserver:8888", 
+        "-t", 
+        "60", 
+        "--", 
+        "java", 
+        "-Dspring.profiles.active=docker", 
+        "-jar", 
+        "/app.jar"
+      ], 
+      "Image": "idugalic/circuit-breaker@sha256:01ddde03d9bf4200da9bbe82a7c772a0ca5f40b95b8d8ffcdc7eb1273b22be87", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 6161, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "command-side-blog": {
+      "Command": [
+        "./wait-for-it.sh", 
+        "configserver:8888", 
+        "-t", 
+        "60", 
+        "--", 
+        "java", 
+        "-Dspring.profiles.active=docker", 
+        "-jar", 
+        "/app.jar"
+      ], 
+      "Image": "idugalic/command-side-blog-service@sha256:4156bfbab9423e2f80f41241cf4957d49c5572d6f891ed1653edaa22042eae91", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 8080, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "command-side-project": {
+      "Command": [
+        "./wait-for-it.sh", 
+        "configserver:8888", 
+        "-t", 
+        "60", 
+        "--", 
+        "java", 
+        "-Dspring.profiles.active=docker", 
+        "-jar", 
+        "/app.jar"
+      ], 
+      "Image": "idugalic/command-side-project-service@sha256:a64f83fcce8e23bd5ddef683d41077df97dd474a7e66ede2b18ad14ee52df3f5", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 8082, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "configserver": {
+      "Image": "idugalic/configserver@sha256:c8d678802d021875419609ae3428e2cb83316ffaffd5c3f8d0551acb1fbabd24", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 8888, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "my-rabbit": {
+      "Env": [
+        "RABBITMQ_DEFAULT_USER=test", 
+        "RABBITMQ_DEFAULT_PASS=password", 
+        "RABBITMQ_NODENAME=my-rabbit"
+      ], 
+      "Image": "rabbitmq@sha256:50068c4b4fc067ba9922aee20308e9375f71045f9fba6173f6c2951b47bd9e1e", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 5672, 
+          "Protocol": "tcp"
+        }, 
+        {
+          "Port": 15672, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "query-side-blog": {
+      "Command": [
+        "./wait-for-it.sh", 
+        "configserver:8888", 
+        "-t", 
+        "60", 
+        "--", 
+        "java", 
+        "-Dspring.profiles.active=docker", 
+        "-jar", 
+        "/app.jar"
+      ], 
+      "Image": "idugalic/query-side-blog-service@sha256:b82e6c66f2a1d09183527bcb3505132423d69896854d738e3b2ed01e34259460", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 8081, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "query-side-project": {
+      "Command": [
+        "./wait-for-it.sh", 
+        "configserver:8888", 
+        "-t", 
+        "60", 
+        "--", 
+        "java", 
+        "-Dspring.profiles.active=docker", 
+        "-jar", 
+        "/app.jar"
+      ], 
+      "Image": "idugalic/query-side-project-service@sha256:aba276cfed4928b1c82d3a8ec4229f3ad3cc66ba56ec9ca9c7c6282a8ea4bd5c", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 8083, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "registry": {
+      "Command": [
+        "./wait-for-it.sh", 
+        "configserver:8888", 
+        "-t", 
+        "60", 
+        "--", 
+        "java", 
+        "-Dspring.profiles.active=docker", 
+        "-jar", 
+        "/app.jar"
+      ], 
+      "Env": [], 
+      "Image": "idugalic/registry@sha256:93fda1a20abe917c9e8b0b78e52d4b8434619ad687d02783513e73616e41f316", 
+      "Networks": [
+        "default"
+      ], 
+      "Ports": [
+        {
+          "Port": 8761, 
+          "Protocol": "tcp"
+        }
+      ]
+    }
+  }, 
+  "Version": "0.1"
+}
